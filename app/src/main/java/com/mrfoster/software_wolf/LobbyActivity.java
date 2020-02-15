@@ -21,14 +21,12 @@ public class LobbyActivity extends AppCompatActivity {
     public static int SIGN_IN_REQUEST_CODE = 10;
     private static final String TAG = "LobbyActivity";
 
-    DatabaseReference gameStateReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_lobby);
-        gameStateReference = FirebaseDatabase.getInstance().getReference().child("game_state");
+        StaticVars.gameStateReference = FirebaseDatabase.getInstance().getReference().child("game_state");
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/up activity
@@ -43,13 +41,21 @@ public class LobbyActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
 
+
+        StaticVars.player = new Player(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().push();
+        temp.setValue(StaticVars.player);
+        StaticVars.playerId = temp.getKey();
+        Log.v(TAG, "The playerId is " + StaticVars.playerId);
         StaticVars.game_state = 0;
+
+
         ValueEventListener gameStateListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // TODO Move to the next activity
-                Log.w(TAG, "Data has been changed to " + dataSnapshot.getValue());
-                if ((StaticVars.game_state == 0) && (long)dataSnapshot.getValue() != (long)0) {
+                // Log.w(TAG, "Data has been changed to " +  dataSnapshot.getValue() + ".equals(1) which equals " +  dataSnapshot.getValue().toString().equals("1") + " and the gameStateReference is " + StaticVars.gameStateReference.child("game_state") + " \n(StaticVars.game_state == 0) =" + (StaticVars.game_state == 0));
+                if ((StaticVars.game_state == 0) && dataSnapshot.getValue().toString().equals("1")) {
                     openRoleActivity();
                 }
             }
@@ -61,7 +67,7 @@ public class LobbyActivity extends AppCompatActivity {
                 // ...
             }
         };
-        gameStateReference.addValueEventListener(gameStateListener);
+        StaticVars.gameStateReference.addValueEventListener(gameStateListener);
     }
 
     private void openRoleActivity() {
