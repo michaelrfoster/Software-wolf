@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -25,6 +27,11 @@ public class LobbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
+
+        //if (StaticVars.game_state != null && !StaticVars.game_state.equals("lobby_state")) {
+        //    refusePlayer();
+        //}
+
         setContentView(R.layout.activity_lobby);
         StaticVars.gameStateReference = FirebaseDatabase.getInstance().getReference().child("game_state");
 
@@ -42,6 +49,8 @@ public class LobbyActivity extends AppCompatActivity {
         }
 
 
+        EditText et = findViewById(R.id.changeNameExitText);
+        et.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         StaticVars.player = new Player(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("players").push();
         temp.setValue(StaticVars.player);
@@ -70,10 +79,21 @@ public class LobbyActivity extends AppCompatActivity {
         StaticVars.gameStateReference.addValueEventListener(gameStateListener);
     }
 
+    private void refusePlayer() {
+        Toast.makeText(this, "Sorry, game already in session! Try again later", Toast.LENGTH_LONG).show();
+        finish();
+    }
+
     public void openRoleActivity() {
         StaticVars.game_state = "role_state";
         Intent intent = new Intent(this, RoleActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void setName(View v) {
+        EditText changeNameEditText = findViewById(R.id.changeNameExitText);
+        StaticVars.player.setName(changeNameEditText.getText().toString());
+        FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("name").setValue(StaticVars.player.getName());
     }
 }
