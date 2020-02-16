@@ -51,7 +51,7 @@ public class BoringNightActivity extends AppCompatActivity {
 
     private void openResultsActivity() {
         StaticVars.game_state = "result_state";
-        Intent intent = new Intent(this, ResultsActivity.class);
+        Intent intent = new Intent(this, WerewolfWinActivity.class);
         startActivity(intent);
         finish();
     }

@@ -37,17 +37,23 @@ public class LobbyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lobby);
         StaticVars.gameStateReference = FirebaseDatabase.getInstance().getReference().child("game_state");
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            // Start sign in/up activity
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            // Start sign in/sign up activity
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
-                            .build(), SIGN_IN_REQUEST_CODE);
+                            .build(),
+                    SIGN_IN_REQUEST_CODE
+            );
         } else {
-            // User is already signed in, therefore, display a welcome Toast
-            Toast.makeText(this, "Welcome " +
-                            FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                    Toast.LENGTH_LONG).show();
+            // User is already signed in. Therefore, display
+            // a welcome Toast
+            Toast.makeText(this,
+                    "Welcome " + FirebaseAuth.getInstance()
+                            .getCurrentUser()
+                            .getDisplayName(),
+                    Toast.LENGTH_LONG)
+                    .show();
         }
 
 
@@ -112,5 +118,28 @@ public class LobbyActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("name").setValue(StaticVars.player.getName());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGN_IN_REQUEST_CODE) {
+            if(resultCode == RESULT_OK) {
+                Toast.makeText(this,
+                        "Successfully signed in. Welcome!",
+                        Toast.LENGTH_LONG)
+                        .show();
+            } else {
+                Toast.makeText(this,
+                        "We couldn't sign you in. Please try again later.",
+                        Toast.LENGTH_LONG)
+                        .show();
+
+                // Close the app
+                finish();
+            }
+        }
+
+    }
 
 }

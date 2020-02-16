@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BoringNightActivity"></activity>
-        <activity android:name=".ResultsActivity" />
+        <activity android:name=".VillagerWinActivity"></activity>
+        <activity android:name=".BoringNightActivity" />
+        <activity android:name=".WerewolfWinActivity" />
         <activity android:name=".NightActivity" />
         <activity android:name=".DayActivity" />
         <activity android:name=".RoleActivity" />

@@ -64,8 +64,10 @@ public class DayActivity extends AppCompatActivity {
         ValueEventListener gameStateListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("result_state")) {
-                    openResultsActivity();
+                if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("werewolf_win_state")) {
+                    openWerewolfWinActivity();
+                } else if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("villager_win_state")) {
+                    openVillagerWinActivity();
                 } else if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("night_state")) {
                     openNightActivity();
                 }
@@ -80,6 +82,7 @@ public class DayActivity extends AppCompatActivity {
         };
         StaticVars.gameStateReference.addValueEventListener(gameStateListener);
     }
+
 
     @Override
     protected void onStart() {
@@ -104,10 +107,18 @@ public class DayActivity extends AppCompatActivity {
         finish();
     }
 
-    private void openResultsActivity() {
-        StaticVars.game_state = "result_state";
-        Intent intent = new Intent(this, ResultsActivity.class);
+    private void openWerewolfWinActivity() {
+        StaticVars.game_state = "werewolf_win_state";
+        Intent intent = new Intent(this, WerewolfWinActivity.class);
         startActivity(intent);
         finish();
     }
+
+    private void openVillagerWinActivity() {
+        StaticVars.game_state = "villager_win_state";
+        Intent intent = new Intent(this, VillagerWinActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

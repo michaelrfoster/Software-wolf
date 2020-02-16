@@ -68,8 +68,10 @@ public class NightActivity extends AppCompatActivity {
                 Log.d(TAG, "The state is " + StaticVars.game_state.toString());
                 if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("day_state")) {
                     openDayActivity();
-                } else if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("result_state")) {
-                    openResultsActivity();
+                } else if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("werewolf_win_state")) {
+                    openWerewolfWinActivity();
+                } else if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("villager_win_state")) {
+                    openVillagerWinActivity();
                 }
             }
 
@@ -102,9 +104,16 @@ public class NightActivity extends AppCompatActivity {
         finish();
     }
 
-    private void openResultsActivity() {
-        StaticVars.game_state = "result_state";
-        Intent intent = new Intent(this, ResultsActivity.class);
+    private void openWerewolfWinActivity() {
+        StaticVars.game_state = "werewolf_win_state";
+        Intent intent = new Intent(this, WerewolfWinActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openVillagerWinActivity() {
+        StaticVars.game_state = "villager_win_state";
+        Intent intent = new Intent(this, VillagerWinActivity.class);
         startActivity(intent);
         finish();
     }
