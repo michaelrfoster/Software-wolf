@@ -8,17 +8,21 @@ public class Player {
 
     private Role role;
     private String name;
+    private boolean dead;
 
     public Player(Role role, String name) {
         this.role = role;
         this.name = name;
+        dead = false;
     }
 
     public Player(String name) {
         this.name = name;
+        dead = false;
     }
 
     public Player() {
+        dead = false;
     }
 
     public Role getRole() {
@@ -37,5 +41,11 @@ public class Player {
         this.name = name;
     }
 
+    public boolean isDead() {
+        return dead;
+    }
 
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
 }
