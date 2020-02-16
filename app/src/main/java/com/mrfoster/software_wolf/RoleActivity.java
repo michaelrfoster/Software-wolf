@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 public class RoleActivity extends AppCompatActivity {
 
     private static final String TAG = "RoleActivity";
+    private static String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class RoleActivity extends AppCompatActivity {
 
     private void getRole() {
 
-        final String[] role = new String[1];
+        //final String[] role = new String[1];
         final TextView roleTextView = findViewById(R.id.roleTextView);
         Log.d(TAG, "I should have this role:" + String.valueOf(FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("role")));
         FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("role").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -57,30 +58,34 @@ public class RoleActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "YOU SHOULD BE HERE");
                 if (StaticVars.game_state.equals("role_state")) {
-                    role[0] = dataSnapshot.getValue().toString();
-                    roleTextView.setText(role[0]);
+                    Log.d(TAG, "dataSnapshot = " + dataSnapshot.toString() + "\n dataSnapshot Key = " + dataSnapshot.getKey().toString() + "\n dataSnapshot Value = " + dataSnapshot.getValue().toString());
+                    role = dataSnapshot.getValue().toString();
+                    roleTextView.setText(role);
+
+                    switch (role != null ? role : "Villager") {
+                        case "Villager":
+                            StaticVars.player.setRole(Player.Role.Villager);
+                            break;
+                        case "Werewolf":
+                            StaticVars.player.setRole(Player.Role.Werewolf);
+                            break;
+                        default:
+                            StaticVars.player.setRole(Player.Role.Villager);
+                            break;
+                    }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                role[0] = null;
+                role = null;
             }
         });
 
-        switch (role[0] != null ? role[0] : "Villager") {
-            case "Villager":
-                StaticVars.player.setRole(Player.Role.Villager);
-                break;
-            case "Werewolf":
-                StaticVars.player.setRole(Player.Role.Werewolf);
-                break;
-            default:
-                StaticVars.player.setRole(Player.Role.Villager);
-                break;
-        }
+        Log.d(TAG, "The role is " + role);
 
-        Log.d(TAG, "The text will say " + role[0]);
+
+        Log.d(TAG, "The text will say " + role);
     }
 
     /*public void ready(View view) {

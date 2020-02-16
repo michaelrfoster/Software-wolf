@@ -95,7 +95,11 @@ public class DayActivity extends AppCompatActivity {
 
     private void openNightActivity() {
         StaticVars.game_state = "night_state";
-        Intent intent = new Intent(this, NightActivity.class);
+        Intent intent;
+        if (StaticVars.player.getRole() == Player.Role.Werewolf)
+            intent = new Intent(this, NightActivity.class);
+        else
+            intent = new Intent(this, BoringNightActivity.class);
         startActivity(intent);
         finish();
     }
