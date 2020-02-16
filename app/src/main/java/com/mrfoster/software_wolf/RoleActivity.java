@@ -6,15 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 public class RoleActivity extends AppCompatActivity {
 
@@ -73,13 +70,13 @@ public class RoleActivity extends AppCompatActivity {
 
         switch (role[0] != null ? role[0] : "Villager") {
             case "Villager":
-                StaticVars.player.setRole(Player.Role.Villiager);
+                StaticVars.player.setRole(Player.Role.Villager);
                 break;
             case "Werewolf":
                 StaticVars.player.setRole(Player.Role.Werewolf);
                 break;
             default:
-                StaticVars.player.setRole(Player.Role.Villiager);
+                StaticVars.player.setRole(Player.Role.Villager);
                 break;
         }
 

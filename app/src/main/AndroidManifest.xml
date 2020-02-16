@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ResultsActivity" />
-        <activity android:name=".LynchActivity" />
         <activity android:name=".NightActivity" />
         <activity android:name=".DayActivity" />
         <activity android:name=".RoleActivity" />

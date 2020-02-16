@@ -3,7 +3,7 @@ package com.mrfoster.software_wolf;
 public class Player {
 
     public enum Role {
-        Villiager, Werewolf
+        Villager, Werewolf
     }
 
     private Role role;

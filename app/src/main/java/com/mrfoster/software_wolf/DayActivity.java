@@ -1,6 +1,5 @@
 package com.mrfoster.software_wolf;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,9 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 public class DayActivity extends AppCompatActivity {
 
@@ -42,7 +38,6 @@ public class DayActivity extends AppCompatActivity {
         }
     };
 
-    private String prevName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +46,8 @@ public class DayActivity extends AppCompatActivity {
 
         ListView lv = findViewById(R.id.nameListView);
         final TextView tv = findViewById(R.id.whoKillTextView);
+        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("vote");
+        temp.setValue("Abstain");
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,8 +64,8 @@ public class DayActivity extends AppCompatActivity {
         ValueEventListener gameStateListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("lynch_state")) {
-                    openLynchActivity();
+                if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("result_state")) {
+                    openResultsActivity();
                 } else if ((StaticVars.game_state.equals("day_state")) && dataSnapshot.getValue().toString().equals("night_state")) {
                     openNightActivity();
                 }
@@ -103,9 +100,9 @@ public class DayActivity extends AppCompatActivity {
         finish();
     }
 
-    private void openLynchActivity() {
-        StaticVars.game_state = "lynch_state";
-        Intent intent = new Intent(this, LynchActivity.class);
+    private void openResultsActivity() {
+        StaticVars.game_state = "result_state";
+        Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
         finish();
     }
