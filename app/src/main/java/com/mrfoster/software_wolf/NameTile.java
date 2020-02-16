@@ -1,5 +1,9 @@
 package com.mrfoster.software_wolf;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 public class NameTile {
 
     private String name;
@@ -18,4 +22,6 @@ public class NameTile {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

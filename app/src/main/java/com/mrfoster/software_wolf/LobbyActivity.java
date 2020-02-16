@@ -47,7 +47,7 @@ public class LobbyActivity extends AppCompatActivity {
         temp.setValue(StaticVars.player);
         StaticVars.playerId = temp.getKey();
         Log.v(TAG, "The playerId is " + StaticVars.playerId);
-        StaticVars.game_state = 0;
+        StaticVars.game_state = "lobby_state";
 
 
         ValueEventListener gameStateListener = new ValueEventListener() {
@@ -55,7 +55,7 @@ public class LobbyActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // TODO Move to the next activity
                 // Log.w(TAG, "Data has been changed to " +  dataSnapshot.getValue() + ".equals(1) which equals " +  dataSnapshot.getValue().toString().equals("1") + " and the gameStateReference is " + StaticVars.gameStateReference.child("game_state") + " \n(StaticVars.game_state == 0) =" + (StaticVars.game_state == 0));
-                if ((StaticVars.game_state == 0) && dataSnapshot.getValue().toString().equals("1")) {
+                if ((StaticVars.game_state.equals("lobby_state")) && dataSnapshot.getValue().toString().equals("role_state")) {
                     openRoleActivity();
                 }
             }
@@ -71,7 +71,7 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
     public void openRoleActivity() {
-        StaticVars.game_state = 1;
+        StaticVars.game_state = "role_state";
         Intent intent = new Intent(this, RoleActivity.class);
         startActivity(intent);
         finish();

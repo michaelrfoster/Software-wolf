@@ -28,9 +28,7 @@ public class RoleActivity extends AppCompatActivity {
         ValueEventListener gameStateListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // TODO Move to the next activity
-                // Log.w(TAG, "Data has been changed to " +  dataSnapshot.getValue() + ".equals(1) which equals " +  dataSnapshot.getValue().toString().equals("1") + " and the gameStateReference is " + StaticVars.gameStateReference.child("game_state") + " \n(StaticVars.game_state == 0) =" + (StaticVars.game_state == 0));
-                if ((StaticVars.game_state == 1) && dataSnapshot.getValue().toString().equals("2")) {
+                if ((StaticVars.game_state.equals("role_state")) && dataSnapshot.getValue().toString().equals("day_state")) {
                     openDayActivity();
                 }
             }
@@ -61,7 +59,7 @@ public class RoleActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "YOU SHOULD BE HERE");
-                if (StaticVars.game_state == 1) {
+                if (StaticVars.game_state.equals("role_state")) {
                     role[0] = dataSnapshot.getValue().toString();
                     roleTextView.setText(role[0]);
                 }
@@ -107,7 +105,7 @@ public class RoleActivity extends AppCompatActivity {
     }*/
 
     public void openDayActivity() {
-        StaticVars.game_state = 2;
+        StaticVars.game_state = "day_state";
         Intent intent = new Intent(this, DayActivity.class);
         startActivity(intent);
         finish();
