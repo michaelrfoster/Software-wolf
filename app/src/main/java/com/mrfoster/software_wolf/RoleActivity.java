@@ -56,7 +56,8 @@ public class RoleActivity extends AppCompatActivity {
 
         final String[] role = new String[1];
         final TextView roleTextView = findViewById(R.id.roleTextView);
-        FirebaseDatabase.getInstance().getReference().child(StaticVars.playerId).child("role").addListenerForSingleValueEvent(new ValueEventListener() {
+        Log.d(TAG, "I should have this role:" + String.valueOf(FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("role")));
+        FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("role").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "YOU SHOULD BE HERE");
@@ -87,7 +88,7 @@ public class RoleActivity extends AppCompatActivity {
         Log.d(TAG, "The text will say " + role[0]);
     }
 
-    public void ready(View view) {
+    /*public void ready(View view) {
         if (!StaticVars.player.isReady()) {
             StaticVars.player.setReady(true);
             FirebaseDatabase.getInstance().getReference().child("ready_players").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,7 +104,7 @@ public class RoleActivity extends AppCompatActivity {
             });
 
         }
-    }
+    }*/
 
     public void openDayActivity() {
         StaticVars.game_state = 2;

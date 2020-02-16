@@ -43,7 +43,7 @@ public class LobbyActivity extends AppCompatActivity {
 
 
         StaticVars.player = new Player(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().push();
+        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("players").push();
         temp.setValue(StaticVars.player);
         StaticVars.playerId = temp.getKey();
         Log.v(TAG, "The playerId is " + StaticVars.playerId);
