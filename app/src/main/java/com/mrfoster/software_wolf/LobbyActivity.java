@@ -70,7 +70,7 @@ public class LobbyActivity extends AppCompatActivity {
         StaticVars.gameStateReference.addValueEventListener(gameStateListener);
     }
 
-    private void openRoleActivity() {
+    public void openRoleActivity() {
         StaticVars.game_state = 1;
         Intent intent = new Intent(this, RoleActivity.class);
         startActivity(intent);
