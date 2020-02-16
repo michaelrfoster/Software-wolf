@@ -74,7 +74,7 @@ public class LobbyActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("dead").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot == null || dataSnapshot.getValue().equals("true")) {
+                if (dataSnapshot == null || dataSnapshot.getValue() == null || dataSnapshot.getValue().equals("true")) {
                     FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).removeValue();
                     openDeadActivity();
                 }

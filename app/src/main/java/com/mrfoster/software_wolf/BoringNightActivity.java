@@ -26,9 +26,9 @@ public class BoringNightActivity extends AppCompatActivity {
                 Log.d(TAG, "The state is " + StaticVars.game_state.toString());
                 if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("day_state")) {
                     openDayActivity();
-                } else if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("result_state")) {
-                    openResultsActivity();
-                }
+                } //else if ((StaticVars.game_state.equals("night_state")) && dataSnapshot.getValue().toString().equals("result_state")) {
+                    //openResultsActivity();
+                //}
             }
 
             @Override

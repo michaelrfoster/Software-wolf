@@ -46,8 +46,10 @@ public class DayActivity extends AppCompatActivity {
 
         ListView lv = findViewById(R.id.nameListView);
         final TextView tv = findViewById(R.id.whoKillTextView);
-        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("vote");
-        temp.setValue("Abstain");
+        if (StaticVars.playerId != null) {
+            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("vote");
+            temp.setValue("Abstain");
+        }
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
