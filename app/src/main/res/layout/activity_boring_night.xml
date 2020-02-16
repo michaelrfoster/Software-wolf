@@ -14,7 +14,9 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Night Phase\nYou should be asleep!"
+        android:fontFamily="@font/regular_font"
         android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

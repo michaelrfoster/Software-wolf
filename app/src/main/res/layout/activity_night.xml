@@ -16,7 +16,8 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/regular_font"/>
 
     <ListView
         android:id="@+id/nameListView"
@@ -38,6 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="64dp"
         android:text="We Should Kill: "
+        android:fontFamily="@font/regular_font"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/special_font"
         android:gravity="center"
         android:text="Abstain"
         android:textSize="30sp"

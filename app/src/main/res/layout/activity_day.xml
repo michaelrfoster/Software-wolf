@@ -14,6 +14,7 @@
         android:layout_marginTop="16dp"
         android:text="Day Phase"
         android:textSize="36sp"
+        android:fontFamily="@font/regular_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +36,7 @@
         android:id="@+id/killLabelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/regular_font"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="64dp"
         android:text="We Should Kill: "
@@ -49,6 +51,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="Abstain"
+        android:fontFamily="@font/special_font"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/killLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/killLabelTextView"

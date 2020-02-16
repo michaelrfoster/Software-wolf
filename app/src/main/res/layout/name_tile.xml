@@ -11,7 +11,8 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="30sp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:fontFamily="@font/special_font"/>
 
 
 </RelativeLayout>
