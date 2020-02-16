@@ -1,5 +1,6 @@
 package com.mrfoster.software_wolf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -77,6 +79,19 @@ public class LobbyActivity extends AppCompatActivity {
             }
         };
         StaticVars.gameStateReference.addValueEventListener(gameStateListener);
+
+        final TextView playerCountTextView = findViewById(R.id.playerCountTextView);
+        FirebaseDatabase.getInstance().getReference().child("players").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                playerCountTextView.setText(Long.toString(dataSnapshot.getChildrenCount()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void refusePlayer() {
@@ -96,4 +111,6 @@ public class LobbyActivity extends AppCompatActivity {
         StaticVars.player.setName(changeNameEditText.getText().toString());
         FirebaseDatabase.getInstance().getReference().child("players").child(StaticVars.playerId).child("name").setValue(StaticVars.player.getName());
     }
+
+
 }

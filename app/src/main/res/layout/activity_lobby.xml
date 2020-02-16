@@ -38,4 +38,27 @@
         android:text="Set Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/playerCountLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Current # of Players:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/changeNameExitText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WaitingTextView" />
+
+    <TextView
+        android:id="@+id/playerCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="NA"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/playerCountLabelTextView"
+        app:layout_constraintStart_toEndOf="@+id/playerCountLabelTextView"
+        app:layout_constraintTop_toTopOf="@+id/playerCountLabelTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
