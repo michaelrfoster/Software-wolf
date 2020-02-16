@@ -39,6 +39,7 @@ public class LobbyActivity extends AppCompatActivity {
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
+            Log.d(TAG, "its null");
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
@@ -48,6 +49,7 @@ public class LobbyActivity extends AppCompatActivity {
         } else {
             // User is already signed in. Therefore, display
             // a welcome Toast
+            Log.d(TAG, "not null");
             Toast.makeText(this,
                     "Welcome " + FirebaseAuth.getInstance()
                             .getCurrentUser()
@@ -55,11 +57,14 @@ public class LobbyActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG)
                     .show();
         }
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Log.d(TAG, "still null");
+        }
 
-
-        EditText et = findViewById(R.id.changeNameExitText);
-        et.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        StaticVars.player = new Player(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        //EditText et = findViewById(R.id.changeNameExitText);
+        //et.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        //StaticVars.player = new Player(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        StaticVars.player = new Player("Jeffery");
         DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("players").push();
         temp.setValue(StaticVars.player);
         StaticVars.playerId = temp.getKey();
